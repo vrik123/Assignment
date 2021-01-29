@@ -16,7 +16,7 @@ resource "aws_launch_configuration" "example-launchconfig" {
   ebs_block_device {
       device_name = "/dev/sdf"
       volume_type = "gp2"
-      volume_size = 5
+      volume_size = 30
       encrypted   = true
     }
   user_data       =<<-EOF
