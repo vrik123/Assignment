@@ -1,0 +1,22 @@
+provider "aws" {
+  region     = "us-east-1"
+  access_key = ""
+  secret_key = ""
+}
+module "VPC"{
+   source            =  ".//Modules/VPC"
+  }
+module "security"{
+   source            =  ".//Modules/security"	
+   vpc-id            ="${module.VPC.vpc-id}"
+}
+module "ASG"{
+   source            =  ".//Modules/ASG"	
+   instance-sg       = "${module.security.instance-sg}"
+   loadbalancer-sg   = "${module.security.loadbalancer-sg}"
+   sub1              = "${module.VPC.sub1}"
+   sub2              = "${module.VPC.sub2}"
+   pub1              = "${module.VPC.pub1}"
+   pub2              = "${module.VPC.pub2}"
+
+}
